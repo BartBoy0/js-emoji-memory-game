@@ -16,6 +16,8 @@ const emojis = [
   "🐮",
   "🐮",
 ];
+let erros = 0;
+
 let openCards = [];
 
 let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
@@ -30,15 +32,15 @@ for (let i = 0; i < emojis.length; i++) {
 
 function handleClick() {
   if (openCards.length < 2) {
-    this.classList.add("boxOpen");
-    openCards.push(this);
+      this.classList.add("boxOpen");
+      openCards.push(this);
   }
+  
 
   if (openCards.length == 2) {
     setTimeout(checkMatch, 500);
   }
 
-  console.log(openCards);
 }
 
 function checkMatch() {
@@ -48,11 +50,12 @@ function checkMatch() {
   } else {
     openCards[0].classList.remove("boxOpen");
     openCards[1].classList.remove("boxOpen");
+    erros++;
   }
 
   openCards = [];
 
   if (document.querySelectorAll(".boxMatch").length === emojis.length) {
-    alert("Você venceu !");
+    alert("Você venceu ! Erros: "+erros);
   }
 }
